@@ -29,7 +29,6 @@ public class MainActivity extends Activity {
     Button btnLed1, btnLed2, btnLed3, btnpado;
     TextView txtArduino;
     RelativeLayout rlayout;
-    Handler h;
 
     final int RECIEVE_MESSAGE = 1;        // Status  for Handler
     private BluetoothAdapter btAdapter = null;
@@ -43,7 +42,7 @@ public class MainActivity extends Activity {
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // MAC-address of Bluetooth module (you must edit this line)
-    private static String address = "20:16:03:08:64:39";
+    private static String address = "98:D3:61:FD:59:9D";
 
     /** Called when the activity is first created. */
     @Override
@@ -59,41 +58,6 @@ public class MainActivity extends Activity {
 
         txtArduino = (TextView) findViewById(R.id.txtArduino);
         rlayout = (RelativeLayout) findViewById(R.id.layout);
-        h = new Handler() {
-            public void handleMessage(android.os.Message msg) {
-                switch (msg.what) {
-                    case RECIEVE_MESSAGE:
-                        byte[] readBuf = (byte[]) msg.obj;
-                        String strIncom = new String(readBuf, 0, msg.arg1);
-                        sb.append(strIncom);
-                        int endOfLineIndex = sb.indexOf("\r\n");
-                        if (endOfLineIndex > 0) {
-                            String sbprint = sb.substring(0, endOfLineIndex);
-                            sb.delete(0, sb.length());
-                            txtArduino.setText("Data from Arduino: " + sbprint);
-                            if(flag%4==3){
-                                rlayout.setBackgroundColor(Color.rgb(255, 255, 255));
-                            }
-                            else if(flag%4==1){
-                                rlayout.setBackgroundColor(Color.rgb(255, 0, 0));
-                            }
-                            else if(flag%4==2){
-                                rlayout.setBackgroundColor(Color.rgb(0, 255, 0));
-                            }
-                            else if(flag%4==0){
-                                rlayout.setBackgroundColor(Color.rgb(0, 0, 255));
-                            }
-                            flag++;
-                            btnLed1.setEnabled(true);
-                            btnLed2.setEnabled(true);
-                            btnLed3.setEnabled(true);
-                            btnpado.setEnabled(true);
-
-                        }
-                        break;
-                }
-            };
-        };
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();       // get Bluetooth adapter
         checkBTState();
@@ -101,25 +65,25 @@ public class MainActivity extends Activity {
         btnLed1.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("1");
-                //Toast.makeText(getBaseContext(), "Turn on First LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "창문이 열립니다.", Toast.LENGTH_SHORT).show();
             }
         });
         btnLed2.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("2");
-                //Toast.makeText(getBaseContext(), "Turn on Second LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "창문이 닫힙니다.", Toast.LENGTH_SHORT).show();
             }
         });
         btnLed3.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("3");
-                //Toast.makeText(getBaseContext(), "Turn on Third LED", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "빗물센서로 작동됩니다.", Toast.LENGTH_SHORT).show();
             }
         });
         btnpado.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 mConnectedThread.write("0");
-                //Toast.makeText(getBaseContext(), "Turn on all LEDs", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "온도센서로 작동됩니다.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -242,7 +206,6 @@ public class MainActivity extends Activity {
                 try {
                     // Read from the InputStream
                     bytes = mmInStream.read(buffer);        // Get number of bytes and message in "buffer"
-                    h.obtainMessage(RECIEVE_MESSAGE, bytes, -1, buffer).sendToTarget();     // Send to message queue Handler
                 } catch (IOException e) {
                     break;
                 }

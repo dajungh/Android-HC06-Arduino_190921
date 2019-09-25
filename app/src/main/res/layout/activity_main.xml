@@ -13,39 +13,46 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Smart Window"
         android:id="@+id/txtArduino" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="빨강"
+        android:text="창문을 엽니다"
         android:id="@+id/btnLed1"
         android:layout_above="@+id/btnLed2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="초록"
+        android:text="창문을 닫습니다"
         android:id="@+id/btnLed2"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
         android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/btnLed1"
-        android:layout_alignStart="@+id/btnLed1" />
+        />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="주황"
+        android:text="AUTO (빗물센서)"
         android:id="@+id/btnLed3"
         android:layout_below="@+id/btnLed2"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="파도타기"
+        android:text="AUTO (온도센서)"
         android:id="@+id/btnPado"
         android:layout_below="@+id/btnLed3"
-        android:layout_alignLeft="@+id/btnLed3"
-        android:layout_alignStart="@+id/btnLed3" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        />
 </RelativeLayout>
