@@ -11,10 +11,8 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,10 +28,8 @@ public class MainActivity extends Activity {
     TextView txtArduino;
     RelativeLayout rlayout;
 
-    final int RECIEVE_MESSAGE = 1;        // Status  for Handler
     private BluetoothAdapter btAdapter = null;
     private BluetoothSocket btSocket = null;
-    private StringBuilder sb = new StringBuilder();
     private static int flag = 0;
 
     private ConnectedThread mConnectedThread;
@@ -172,7 +168,7 @@ public class MainActivity extends Activity {
             }
         }
     }
-
+//test
     private void errorExit(String title, String message){
         Toast.makeText(getBaseContext(), title + " - " + message, Toast.LENGTH_LONG).show();
         finish();
